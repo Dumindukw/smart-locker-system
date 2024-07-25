@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- ... (your existing head content) ... -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin:0;
+        }
+
+        .container {
+            margin-top: 50px;
+            position:absolute;
+            width:100vw;
+            height:100vh;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor:pointer;
+
+        }
+
+        .b1 {
+            background-color: green;
+        }
+
+        .selection {
+            margin-top: 20px;
+        }
+        .finish{
+            width:100vw;
+            height:100vh;
+            position:absolute;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            color:white;
+            font-size:90px;
+            font-weight:bold;
+            visibility:hidden;
+            
+            
+        }
+        .btnf{
+            width:300px;
+            height:45px;
+            background-color:green;
+            color:white;
+            font-size:24px;
+            border-style:solid;
+            border-color:white;
+            border-width:3px;
+            margin-top:100px;
+            border-radius:10px;
+            cursor:pointer;
+        }
+
+        #proceed-btn {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor:pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <!-- ... (your existing HTML content) ... -->
+
+        <!-- Locker Selection -->
+
+
+        <div>
+            <h2>Select a Building:</h2>
+            <button id="building">Laboratory Building</button>
+        </div>
+        <div>
+            <h2>Select a Floor:</h2>
+            <button id="floor1">Floor 1</button>
+        </div>
+        <form action="process.php" method="post">
+            <div class="selection" id="locker-selection">
+                <h2>Select a Locker:</h2>
+                <div id="locker-buttons">
+                    <button class="b1" type="button" id="10101" onclick="changeColor('10101'); ">Locker 1</button>
+                    <button class="b1" type="button" id="10102" onclick="changeColor('10102')">Locker 2</button>
+                    <button class="b1" type="button" id="10103" onclick="changeColor('10103')">Locker 3</button>
+                    <button class="b1" type="button" id="10104" onclick="changeColor('10104')">Locker 4</button>
+                    <button class="b1" type="button" id="10105" onclick="changeColor('10105')">Locker 5</button>
+                    <br><br>
+                    <button class="b1" type="button" id="10106" onclick="changeColor('10106')">Locker 6</button>
+                    <button class="b1" type="button" id="10107" onclick="changeColor('10107')">Locker 7</button>
+                    <button class="b1" type="button" id="10108" onclick="changeColor('10108')">Locker 8</button>
+                    <button class="b1" type="button" id="10109" onclick="changeColor('10109')">Locker 9</button>
+                    <button class="b1" type="button" id="10110" onclick="changeColor('10110')">Locker 10</button>
+
+
+
+                    <!-- Add buttons for Locker 2 to Locker 10 -->
+                    <!-- ... (similar buttons for all lockers) ... -->
+                </div>
+                <p id="selected-locker">Selected Locker: None</p>
+            </div><br><br>
+
+            <div>
+                <label for="NIC">Enter NIC</label><br>
+                <input type="text" id="NIC" name="NIC" required><br>
+
+                <label for="stuid">Student ID</label><br>
+                <input type="text" id="stuid" name="stuid" value="CT-xxxx-xxx" required><br><br>
+
+                <!-- Store the selected locker in a hidden input field -->
+                <input type="hidden" id="selected-locker-input" name="selected_locker" value="">
+                <br>
+
+                <!-- Proceed Button -->
+                <button type="submit" id="proceed-btn" disabled>Proceed</button>
+
+            </div>
+
+        </form>
+    </div>
+
+    
+
+    <script>
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + value + expires + "; path=/";
+        }
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+                while (cookie.charAt(0) === ' ') {
+                    cookie = cookie.substring(1, cookie.length);
+                }
+                if (cookie.indexOf(nameEQ) === 0) {
+                    return cookie.substring(nameEQ.length, cookie.length);
+                }
+            }
+            return null;
+        }
+
+        var selectedLocker = null;
+        // ... (your JavaScript for locker selection)
+
+        // Update the hidden input field with the selected locker
+        function changeColor(locker) {
+
+            var button = document.getElementById(locker);
+            var currentColor = getCookie(locker);
+
+            if (currentColor === 'red' || currentColor === null) {
+            button.style.backgroundColor = 'green';
+            setCookie(locker, 'green', 7);
+        } else {
+            button.style.backgroundColor = 'red';
+            setCookie(locker, 'red', 7);
+        }
+
+            selectedLocker = locker;
+            document.getElementById("selected-locker").textContent = "Selected Locker: " + locker;
+            document.getElementById("selected-locker-input").value = locker;
+            document.getElementById("proceed-btn").disabled = false;
+            button.style.backgroundColor = "red";
+        }
+        window.onload = function () {
+        var button1Color = getCookie('10101');
+        if (button1Color) {
+            document.getElementById('10101').style.backgroundColor = button1Color;
+        }
+
+        var button2Color = getCookie('10102');
+        if (button2Color) {
+            document.getElementById('10102').style.backgroundColor = button2Color;
+        }
+        
+        var button3Color = getCookie('10103');
+        if (button3Color) {
+            document.getElementById('10103').style.backgroundColor = button3Color;
+        }
+        var button4Color = getCookie('10104');
+        if (button4Color) {
+            document.getElementById('10104').style.backgroundColor = button4Color;
+        }
+        var button5Color = getCookie('10105');
+        if (button5Color) {
+            document.getElementById('10105').style.backgroundColor = button5Color;
+        }
+        var button6Color = getCookie('10106');
+        if (button6Color) {
+            document.getElementById('10106').style.backgroundColor = button6Color;
+        }
+        var button7Color = getCookie('10107');
+        if (button7Color) {
+            document.getElementById('10107').style.backgroundColor = button7Color;
+        }
+        var button8Color = getCookie('10108');
+        if (button8Color) {
+            document.getElementById('10108').style.backgroundColor = button8Color;
+        }
+        var button9Color = getCookie('10109');
+        if (button9Color) {
+            document.getElementById('10109').style.backgroundColor = button9Color;
+        }
+        var button10Color = getCookie('10110');
+        if (button10Color) {
+            document.getElementById('10110').style.backgroundColor = button10Color;
+        }
+        
+    }
+    
+
+    </script>
+</body>
+
+</html>

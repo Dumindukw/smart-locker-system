@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<style>
+	body {
+	
+  background-image: url('IMG_0765.JPG');
+  
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #f1f1f1;
+	    
+	}
+	.container{
+	    height:410;
+	}
+  
+	</style>
+
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE-edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="Background.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/bootsrap.css">
+  <script src="js/bootstrap.js"></script>
+</head>
+<body Background="IMG_0765.JPG">
+    
+<div class="container">
+    <form id="login-form" action="login.php" method="POST">
+      <h2>Login</h2>
+      <label for="Email"></label>
+      <input type="text" id="email" name="email" placeholder="Email" required>
+      <label for="Password"></label>
+      <input type="password" id="password" name="password" placeholder="Password" required>
+      <br><br>
+      <input type="submit" class="btn btn-primary" value="login" name="save">
+	  <br>
+      <a href="signup.html" class="btn-signup">Sign Up</a>
+      <br><a href="forgotpassword.html" class="btn-forgot-password">Forgot Password?</a>
+    </form>
+  </div>
+  
+  <script>
+    function auth() {
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+    
+        if (email === "admin@gmail.com" && password === "user") {
+            window.location.href="home1.html";
+            // alert("You Are a ADMIN");
+    
+        } else {
+            alert("Invalid information");
+            return;
+   }
+
+
+    }
+  </script>
+  
+
+  
+  
+  
+  
+  
+</body>
+</html>

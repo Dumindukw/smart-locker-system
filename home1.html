@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selection Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        .selection {
+            margin-top: 20px;
+        }
+        #proceed-btn {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Selection Page</h1>
+        
+        <!-- Building Selection -->
+        <div class="selection" id="building-selection">
+            <h2>Select a Building:</h2>
+            <button id="building1" onclick="selectBuilding('Building 1')">Building 1</button>
+            <button id="building2" onclick="selectBuilding('Building 2')">Building 2</button>
+            <button id="building3" onclick="selectBuilding('Building 3')">Building 3</button>
+            <button id="building4" onclick="selectBuilding('Building 4')">Building 4</button>
+            <p id="selected-building">Selected Building: None</p>
+        </div>
+        
+        <!-- Floor Selection -->
+        <div class="selection" id="floor-selection" style="display: none;">
+            <h2>Select a Floor:</h2>
+            <button id="floor1" onclick="selectFloor('Floor 1')">Floor 1</button>
+            <button id="floor2" onclick="selectFloor('Floor 2')">Floor 2</button>
+            <button id="floor3" onclick="selectFloor('Floor 3')">Floor 3</button>
+            <p id="selected-floor">Selected Floor: None</p>
+        </div>
+        
+        <!-- Locker Selection -->
+        <div class="selection" id="locker-selection" style="display: none;">
+            <form id="lockerselect" action="home1.php" method="POST">
+            <h2>Select a Locker:</h2>
+            <button id="lockerid" name="lockerid" value="10101" onclick="selectLocker('10101')">Locker 1</button>
+            <button id="lockerid" name="lockerid" value="10102" onclick="selectLocker('10102')">Locker 2</button>
+            <p id="selected-locker">Selected Locker: None</p>
+            </form>
+        </div>
+        
+        <!-- Proceed Button -->
+        <button id="proceed-btn" onclick="proceed()" disabled>Proceed</button>
+    </div>
+    
+    <form>
+         <label for="NIC">Enter NIC</label><br>
+         <input type="text" id="NIC" name="NIC" ><br>
+         <label for="stuid">student id</label><br>
+         <input type="text" id="stuid" name="stuid" ><br><br>
+  <input type="submit" value="Submit">
+    </form>
+    
+    <script>
+        // Track the selected options
+        let selectedBuilding = null;
+        let selectedFloor = null;
+        let selectedLocker = null;
+
+        // Function to update the selected building
+        function selectBuilding(building) {
+            selectedBuilding = building;
+            document.getElementById("selected-building").textContent = "Selected Building: " + building;
+            document.getElementById("floor-selection").style.display = "block";
+        }
+
+        // Function to update the selected floor
+        function selectFloor(floor) {
+            selectedFloor = floor;
+            document.getElementById("selected-floor").textContent = "Selected Floor: " + floor;
+            document.getElementById("locker-selection").style.display = "block";
+        }
+
+        // Function to update the selected locker
+        function selectLocker(locker) {
+            selectedLocker = locker;
+            document.getElementById("selected-locker").textContent = "Selected Locker: " + locker;
+            document.getElementById("proceed-btn").disabled = false;
+        }
+
+        // Function to proceed to the next page (You can replace this with your desired action)
+        function proceed() {
+            if (selectedBuilding && selectedFloor && selectedLocker) {
+                // Replace this with your desired action
+                alert("Proceeding to the next page with selections:\n" +
+                    "Building: " + selectedBuilding + "\n" +
+                    "Floor: " + selectedFloor + "\n" +
+                    "Locker: " + selectedLocker);
+            }
+        }
+    </script>
+</body>
+</html>
